@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/chatScreen">
+
+    <fragment
+        android:id="@+id/chatScreen"
+        android:name="com.example.wsr.ChatScreen"
+        android:label="fragment_chat_screen"
+        tools:layout="@layout/fragment_chat_screen" />
+    <fragment
+        android:id="@+id/profileScreen"
+        android:name="com.example.wsr.ProfileScreen"
+        android:label="fragment_profile_screen"
+        tools:layout="@layout/fragment_profile_screen" />
+    <fragment
+        android:id="@+id/settingsScreen"
+        android:name="com.example.wsr.SettingsScreen"
+        android:label="fragment_settings_screen"
+        tools:layout="@layout/fragment_settings_screen" />
+</navigation>
