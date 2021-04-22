@@ -45,9 +45,6 @@ class Chat : AppCompatActivity() {
 
                     list_item.adapter = adapter
 
-                    var lp = (LinearLayout.LayoutParams) imageView.getLayoutParams();
-                    lp.gravity = Gravity.BOTTOM;
-                    imageView.setLayoutParams(lp)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
