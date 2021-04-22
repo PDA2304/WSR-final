@@ -39,7 +39,8 @@ class SignUpScreen : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
-            var auth = FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                 email.text.toString(),
                 pass.text.toString()
             ).addOnCompleteListener(this,
@@ -52,6 +53,15 @@ class SignUpScreen : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                         Log.i("Tag",taskId.toString())
+                        var uid = FirebaseAuth.getInstance().uid
+                        var database = FirebaseDatabase.getInstance().getReference("/user/$uid")
+                        var user = User(name.text.toString(), email.text.toString(), pass.text.toString())
+                        database.setValue(user).addOnSuccessListener {
+                            var intent = Intent(this, SignInScreen::class.java)
+                            intent.flags =  Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            FirebaseAuth.getInstance().signOut()
+                            startActivity(intent)
+                        }
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(
@@ -60,11 +70,10 @@ class SignUpScreen : AppCompatActivity() {
                         ).show()
                     }
                 })
-            var database = FirebaseDatabase.getInstance().getReference("user").get()
-            var user = User(name.text.toString(), email.text.toString(), pass.text.toString())
-                //database.setValue(user)
-            var intent = Intent(this, SignInScreen::class.java)
-            startActivity(intent)
+
+
+
+
         }
         btn_cansel.setOnClickListener {
             var intent = Intent(this, SignInScreen::class.java)
@@ -75,4 +84,6 @@ class SignUpScreen : AppCompatActivity() {
 
 data class User(
     var name: String, var email: String, var pass: String
-) : Observable()
+) : Observable(){
+    constructor() : this("","","")
+}

@@ -9,7 +9,6 @@ class LaunchScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val intent = Intent(this, SignInScreen::class.java)
         startActivity(intent)
-        Thread.sleep(1000)
         finish()
     }
 }
